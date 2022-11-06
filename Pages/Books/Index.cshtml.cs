@@ -29,7 +29,7 @@ namespace Munteanu_Bianca_Lab2.Pages.Books
         public string CurrentFilter { get; set; }
 
         public async Task OnGetAsync(int? id, int? categoryID, string sortOrder, string
-searchString)
+ searchString)
         {
             BookD = new BookData();
 
@@ -52,8 +52,9 @@ searchString)
             {
                 BookD.Books = BookD.Books.Where(s => s.Author.FirstName.Contains(searchString)
 
-               || s.Author.LastName.Contains(searchString)
-               || s.Title.Contains(searchString));
+                    || s.Author.LastName.Contains(searchString)
+                    || s.Title.Contains(searchString));
+
             }
 
             if (id != null)
@@ -63,7 +64,17 @@ searchString)
                 .Where(i => i.ID == id.Value).Single();
                 BookD.Categories = book.BookCategories.Select(s => s.Category);
 
-                
+                switch (sortOrder)
+                {
+                    case "title_desc":
+                        BookD.Books = BookD.Books.OrderByDescending(s =>
+                       s.Title);
+                        break;
+                    case "author_desc":
+                        BookD.Books = BookD.Books.OrderByDescending(s =>
+                       s.Author.FullName);
+                        break;
+                }
 
             }
         }
