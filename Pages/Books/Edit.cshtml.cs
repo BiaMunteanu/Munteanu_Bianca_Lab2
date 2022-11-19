@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,6 +13,8 @@ using Munteanu_Bianca_Lab2.Models;
 
 namespace Munteanu_Bianca_Lab2.Pages.Books
 {
+    [Authorize(Roles = "Admin")]
+
     public class EditModel : BookCategoriesPageModel
     {
         private readonly Munteanu_Bianca_Lab2.Data.Munteanu_Bianca_Lab2Context _context;
